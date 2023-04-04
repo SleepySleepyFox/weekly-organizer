@@ -8,7 +8,7 @@ import { addtodo } from './features/todoSlice'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem'
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu'
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
-import { useIsOverflow } from './hooks/useIsOverflow '
+
 
 
 
@@ -16,9 +16,6 @@ export default function App() {
   const selectAllValue = (state) => state.todoSlice.loc.all
   const [input, setInput] = useState('')
   const task = useSelector(selectAllValue)
-
-  const ref = React.useRef();
-  const isOverflow = useIsOverflow(ref);
 
   function addTask(){
     input != "" && store.dispatch(addtodo(input))
@@ -28,8 +25,8 @@ export default function App() {
   const display = (taskstorage) => (
     taskstorage.map(e => (
       <Container className='w-50 p-2 mb-t-2 mt-2 h-25 d-flex flex-grow-1 justify-content-between bg-light rounded'>
-          {e.taskContent.length < 100 ? 
-          <h1 ref={ref}>{e.taskContent}</h1> :
+          {e.taskContent.length < 15 ? 
+          <h1>{e.taskContent}</h1> :
           <Dropdown className='w-100 dropdown-colo' style={{background: "transparant"}}>
             <DropdownToggle className='w-100 dropdown-color btn-light '>
               <h1 className='text-truncate' style={{color: 'black'}}>{e.taskContent}</h1>
