@@ -1,13 +1,13 @@
-import React, { useRef } from 'react'
 import "./App.css"
 import { Navbar, Nav, Container, ThemeProvider, InputGroup, Button, Form, CloseButton, Dropdown } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import store from './app/store'
-import { addtodo } from './features/todoSlice'
+import { addtodo, drop } from './features/todoSlice'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem'
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu'
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
+import Taskblock from "./components/Taskblock"
 
 
 
@@ -17,32 +17,15 @@ export default function App() {
   const [input, setInput] = useState('')
   const task = useSelector(selectAllValue)
 
+  useEffect(() => {localStorage.setItem('all_localstorage', JSON.stringify(task))},[task])
+
   function addTask(){
     input != "" && store.dispatch(addtodo(input))
-    console.log(input)
+    console.log(task)
   }
   
-  const display = (taskstorage) => (
-    taskstorage.map(e => (
-      <Container className='w-50 p-2 mb-t-2 mt-2 h-25 d-flex flex-grow-1 justify-content-between bg-light rounded'>
-          {e.taskContent.length < 15 ? 
-          <h1>{e.taskContent}</h1> :
-          <Dropdown className='w-100 dropdown-colo' style={{background: "transparant"}}>
-            <DropdownToggle className='w-100 dropdown-color btn-light '>
-              <h1 className='text-truncate' style={{color: 'black'}}>{e.taskContent}</h1>
-            </DropdownToggle>
-            <DropdownMenu className='w-100 wrap-dropdown'> 
-              <DropdownItem className='w-100 text-break wrap-dropdown btn-light'>
-                {e.taskContent}
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>}
-          {e.taskContent.length < 26 && <CloseButton className='align-self-center' />}
-      </Container>
-    ))
-  )
   return (
-      <div>
+      <div >
         <ThemeProvider
         breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
         minBreakpoint="xxs">
@@ -69,9 +52,17 @@ export default function App() {
               <Button onClick={addTask}>OK</Button>
             </InputGroup>
           </Container>
-          <Container className='justify-content-center'>
-            {display(task)}
-          </Container>
+          <div 
+            style={{height: '85vh'}}
+            onDrop={() => store.dispatch(drop('all'))}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            <Container className='justify-content-center'>
+              <Taskblock 
+              contentStorage={task}
+              />
+            </Container>
+          </div>
       </ThemeProvider>
       </div>
       

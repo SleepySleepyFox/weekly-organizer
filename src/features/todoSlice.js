@@ -1,6 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import { json } from "react-router-dom";
-import store from "../app/store";
+import { createSlice } from "@reduxjs/toolkit";
 
 // localStorage.clear('mon_localstorage')
 // localStorage.clear('all_localstorage')
@@ -33,18 +31,17 @@ const todoSlice = createSlice({
             ]
         },
         removetodo: (state, task_id) => {
-            // скорее всего будет удалять таски с одинаковыми id тоесть еслу удаляю так в all / id: 1 таск  с тем же id будет удален и в других местах 
+            console.log('it works')
             state.loc.all = state.loc.all.filter(item => item.id !== task_id.payload)
             state.loc.mon = state.loc.mon.filter(item => item.id !== task_id.payload) 
         },
-        //Удаление при переносе должно происходить и в локальном зранилище 
         drag: (state, task) => {
             state.loc.dragged = task.payload
             if(task.payload.taskLocation === 'all'){
-              state.loc.all = state.loc.all.filter(item => item.id != task.payload.id)  
+              state.loc.all = state.loc.all.filter(item => item.id !== task.payload.id)  
             }else
                 if(task.payload.taskLocation === 'mon'){
-                    state.loc.mon = state.loc.mon.filter(item => item.id != task.payload.id)
+                    state.loc.mon = state.loc.mon.filter(item => item.id !== task.payload.id)
                 }
         },
         drop: (state, location) => {

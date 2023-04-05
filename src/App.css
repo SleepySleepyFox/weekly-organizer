@@ -27,9 +27,12 @@
 .App-link {
   color: #61dafb;
 }
-
 .wrap-dropdpwn{
   white-space: normal;
+}
+
+.custom-dropdown{
+  display: flex;
 }
 @keyframes App-logo-spin {
   from {
