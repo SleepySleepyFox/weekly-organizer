@@ -1,12 +1,13 @@
 import "./App.css"
-import { Container, ThemeProvider, InputGroup, Button, Form } from 'react-bootstrap'
+import { Container, ThemeProvider } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useEffect} from 'react'
 import store from './app/store'
 import { drop } from './features/todoSlice'
 import Taskblock from "./components/Taskblock"
-import Navigation from "./components/Navigation"
 import Input from "./components/Input"
+import { Link } from "react-router-dom"
+
 
 
 
@@ -22,7 +23,6 @@ export default function App() {
         <ThemeProvider
         breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
         minBreakpoint="xxs">
-          <Navigation />
           <Input />
           <div 
             style={{height: '85vh'}}
