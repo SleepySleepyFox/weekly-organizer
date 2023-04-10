@@ -13,6 +13,7 @@ function Taskblock (props) {
       <Container 
         className='w-50 p-2 mb-t-2 mt-2 h-25 d-flex flex-grow-1 justify-content-between bg-light rounded'
         draggable = {true}
+        key = {e.id}
         onDragOver={(e) => e.preventDefault()}
         onDrag={() => store.dispatch(drag(e))}
       >
