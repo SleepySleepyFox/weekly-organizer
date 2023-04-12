@@ -6,10 +6,12 @@ import store from './app/store'
 import { drop } from './features/todoSlice'
 import Taskblock from "./components/Taskblock"
 import Input from "./components/Input"
-import { Link } from "react-router-dom"
 
 
-
+// У каждого компонента должен быть уникальный key иначе появляеться тот баг с удалением поэтому в каждом отдельном
+// Компоненте нужно пересортировывать таски таким образом чтобы их ключи сохранялись уникальными 
+// можно в самом компоненте создать переменную которая будет хранить состояния и в нее с помощью 
+// .map переписывать и выволить на экран элементы которые уже будет содержать уникалный ключ 
 
 
 export default function App() {

@@ -5,6 +5,7 @@ import DropdownMenu from 'react-bootstrap/esm/DropdownMenu'
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
 import { Container, CloseButton, Dropdown } from 'react-bootstrap'
 import store from "../app/store"
+import uniqid from 'uniqid';
 
 function Taskblock (props) {
 
@@ -13,7 +14,7 @@ function Taskblock (props) {
       <Container 
         className='w-50 p-2 mb-t-2 mt-2 h-25 d-flex flex-grow-1 justify-content-between bg-light rounded'
         draggable = {true}
-        key = {e.id}
+        key = {uniqid()}
         onDragOver={(e) => e.preventDefault()}
         onDrag={() => store.dispatch(drag(e))}
       >
